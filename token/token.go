@@ -18,9 +18,27 @@ const (
 	RPAREN    = ")"
 	LBRACE    = "{"
 	RBRACE    = "}"
+	MINUS     = "-"
+	BANG      = "!"
+	ASTERISK  = "*"
+	SLASH     = "/"
+	LT        = "<"
+	GT        = ">"
+
+	EQ     = "=="
+	NOT_EQ = "!="
+	GTE    = ">="
+	LTE    = "<="
+
 	// Keywords
 	FUNCTION = "FUNCTION"
 	LET      = "LET"
+	TRUE     = "TRUE"
+	FALSE    = "FALSE"
+	IF       = "IF"
+	ELSE     = "ELSE"
+	RETURN   = "RETURN"
+	EXIT     = "EXIT" // this is for repl
 )
 
 type Token struct {
@@ -28,13 +46,19 @@ type Token struct {
 	Literal string
 }
 
-var keyWords = map[string]TokenType{
-	"fn":  FUNCTION,
-	"let": LET,
+var keywords = map[string]TokenType{
+	"fn":     FUNCTION,
+	"let":    LET,
+	"true":   TRUE,
+	"false":  FALSE,
+	"if":     IF,
+	"else":   ELSE,
+	"return": RETURN,
+	"exit":   EXIT,
 }
 
 func LookUpIndent(keyword string) TokenType {
-	if tok, ok := keyWords[keyword]; ok {
+	if tok, ok := keywords[keyword]; ok {
 		return tok
 	}
 	return IDENT
